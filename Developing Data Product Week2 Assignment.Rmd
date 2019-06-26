@@ -1,0 +1,44 @@
+---
+title: "Developing Data Products Week2 Assignment"
+author: "Pinku"
+date: "23 June 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+Create a web page using R Markdown that features a map created with Leaflet.
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity!
+
+## Review criteria
+The rubric contains the following two questions:
+
+- Does the web page feature a date and is this date less than two months before the date that you’re grading this assignment?
+- Does the web page feature an interactive map that appears to have been created with Leaflet?
+
+## Submission
+
+Idea is to create Map which shows Indian cities.Source data has been refered from https://simplemaps.com/
+
+Let’s first load the library Leaflet.
+
+```{r}
+library(leaflet)
+```
+
+## Indian Cities Map
+
+```{r}
+setwd("F:/Data Science Specialization/9 Developing Data Products/Week2/Assignment")
+df <- read.csv("IndianCities.csv")
+df %>% leaflet() %>%
+  addTiles() %>%
+  addMarkers(lat = df$lat,lng = df$lng,popup = paste(df$popup, "<br>", "City:", df$city_ascii),clusterOptions =    markerClusterOptions())
+
+```
